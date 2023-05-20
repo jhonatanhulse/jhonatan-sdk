@@ -56,6 +56,10 @@ client
 
 ## Development
 
+### Implementation
+
+Check [DESIGN.md](DESIGN.md) for more details about the implementation.
+
 ### Compiling the library
 
 You can compile the library with the following command:
