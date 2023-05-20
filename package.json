@@ -7,6 +7,8 @@
     "node": ">= 18.16.0"
   },
   "scripts": {
+    "prebuild": "rimraf ./dist/",
+    "build": "tsc -p tsconfig.build.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/jhullse/jhonatan-sdk/issues"
   },
-  "homepage": "https://github.com/jhullse/jhonatan-sdk#readme"
+  "homepage": "https://github.com/jhullse/jhonatan-sdk#readme",
+  "devDependencies": {
+    "rimraf": "^5.0.1",
+    "typescript": "^5.0.4"
+  }
 }
