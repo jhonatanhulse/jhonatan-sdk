@@ -2,7 +2,8 @@
   "name": "jhonatan-sdk",
   "version": "1.0.0",
   "description": "The One API SDK",
-  "main": "index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "engines": {
     "node": ">= 18.16.0"
   },
@@ -12,6 +13,7 @@
     "clean": "rimraf ./coverage/ ./dist/",
     "prebuild": "rimraf ./dist/",
     "build": "tsc -p tsconfig.build.json",
+    "prepublish": "npm run build",
     "test": "jest",
     "test:cov": "jest --coverage",
     "prepare": "husky install"
