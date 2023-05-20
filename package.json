@@ -1,0 +1,22 @@
+{
+  "name": "jhonatan-sdk",
+  "version": "1.0.0",
+  "description": "The One API SDK",
+  "main": "index.ts",
+  "engines": {
+    "node": ">= 18.16.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/jhullse/jhonatan-sdk.git"
+  },
+  "author": "Jhonatan Hulse",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jhullse/jhonatan-sdk/issues"
+  },
+  "homepage": "https://github.com/jhullse/jhonatan-sdk#readme"
+}
