@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import { Movie, Resource } from './resources';
+import { Movie, Quote, Resource } from './resources';
 
 export interface ListRequestParams {
   readonly page?: number;
@@ -11,6 +11,7 @@ export interface TheOneApiClientConfig {
 
 export class TheOneApiClient {
   static readonly BASE_URL = 'https://the-one-api.dev/v2';
+  static readonly QUOTE_ENDPOINT = 'quote';
   static readonly MOVIES_ENDPOINT = 'movie';
   readonly axios: AxiosInstance;
 
@@ -23,6 +24,14 @@ export class TheOneApiClient {
         Authorization: `Bearer ${accessToken}`,
       },
     });
+  }
+
+  async listQuotes(params: ListRequestParams = {}): Promise<Resource<Quote>> {
+    return (
+      await this.axios.get<Resource<Quote>>(TheOneApiClient.QUOTE_ENDPOINT, {
+        params,
+      })
+    ).data;
   }
 
   async listMovies(params: ListRequestParams = {}): Promise<Resource<Movie>> {
