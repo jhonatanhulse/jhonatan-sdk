@@ -1,4 +1,5 @@
 import MockAdapter from 'axios-mock-adapter';
+import { Movie } from '../src/resources';
 import { TheOneApiClient } from '../src/the-one-api-client';
 import { MOVIES_P1, MOVIES_P2 } from './mock-data';
 
@@ -43,6 +44,25 @@ describe('TheOneApiClient', () => {
       expect(total).toBe(8);
       expect(page).toBe(2);
       expect(pages).toBe(2);
+    });
+  });
+
+  describe('#getMovie()', () => {
+    it('should return the movie with the passed id', async () => {
+      const id = '5cd95395de30eff6ebccde56';
+      const url = `${TheOneApiClient.MOVIES_ENDPOINT}/${id}`;
+      mock.onGet(url).reply(200, MOVIES_P1);
+
+      const movie = (await client.getMovie(id)) as Movie;
+
+      expect(movie._id).toBe('5cd95395de30eff6ebccde56');
+      expect(movie.name).toBe('The Lord of the Rings Series');
+      expect(movie.runtimeInMinutes).toBe(558);
+      expect(movie.budgetInMillions).toBe(281);
+      expect(movie.boxOfficeRevenueInMillions).toBe(2917);
+      expect(movie.academyAwardNominations).toBe(30);
+      expect(movie.academyAwardWins).toBe(17);
+      expect(movie.rottenTomatoesScore).toBe(94);
     });
   });
 });

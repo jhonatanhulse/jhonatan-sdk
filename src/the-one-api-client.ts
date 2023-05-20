@@ -32,4 +32,12 @@ export class TheOneApiClient {
       })
     ).data;
   }
+
+  async getMovie(id: string): Promise<Movie | undefined> {
+    return (
+      await this.axios.get<Resource<Movie>>(
+        `${TheOneApiClient.MOVIES_ENDPOINT}/${id}`,
+      )
+    ).data.docs[0];
+  }
 }
