@@ -57,4 +57,20 @@ export class TheOneApiClient {
       )
     ).data.docs[0];
   }
+
+  async listMovieQuotes(
+    id: string,
+    params: ListRequestParams = {},
+  ): Promise<Resource<Quote>> {
+    const moviesEndpoint = TheOneApiClient.MOVIES_ENDPOINT;
+
+    return (
+      await this.axios.get<Resource<Quote>>(
+        `${moviesEndpoint}/${id}/${TheOneApiClient.QUOTE_ENDPOINT}`,
+        {
+          params,
+        },
+      )
+    ).data;
+  }
 }

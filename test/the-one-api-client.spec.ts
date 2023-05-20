@@ -1,7 +1,14 @@
 import MockAdapter from 'axios-mock-adapter';
 import { Movie, Quote } from '../src/resources';
 import { TheOneApiClient } from '../src/the-one-api-client';
-import { MOVIES_P1, MOVIES_P2, QUOTES_P1, QUOTES_P2 } from './mock-data';
+import {
+  MOVIE_QUOTES_P1,
+  MOVIE_QUOTES_P2,
+  MOVIES_P1,
+  MOVIES_P2,
+  QUOTES_P1,
+  QUOTES_P2,
+} from './mock-data';
 
 describe('TheOneApiClient', () => {
   const client = new TheOneApiClient({ accessToken: 'accessToken' });
@@ -63,6 +70,50 @@ describe('TheOneApiClient', () => {
       expect(movie.academyAwardNominations).toBe(30);
       expect(movie.academyAwardWins).toBe(17);
       expect(movie.rottenTomatoesScore).toBe(94);
+    });
+  });
+
+  describe('#listMovieQuotes()', () => {
+    it("should return the first page of the movie's quote list", async () => {
+      const moviesEndpoint = TheOneApiClient.MOVIES_ENDPOINT;
+      const id = '5cd95395de30eff6ebccde5c';
+      const url = `${moviesEndpoint}/${id}/${TheOneApiClient.QUOTE_ENDPOINT}`;
+      mock.onGet(url).reply(200, MOVIE_QUOTES_P1);
+
+      const {
+        docs: quotes,
+        total,
+        page,
+        pages,
+      } = await client.listMovieQuotes(id);
+
+      expect(mock.history.get[0].url).toEqual(url);
+      expect(quotes.length).toBe(5);
+      expect(total).toBe(10);
+      expect(page).toBe(1);
+      expect(pages).toBe(2);
+    });
+
+    it("should return the second page of the movie's quote list", async () => {
+      const moviesEndpoint = TheOneApiClient.MOVIES_ENDPOINT;
+      const id = '5cd95395de30eff6ebccde5c';
+      const url = `${moviesEndpoint}/${id}/${TheOneApiClient.QUOTE_ENDPOINT}`;
+      const params = { page: 2 };
+      mock.onGet(url, params).reply(200, MOVIE_QUOTES_P2);
+
+      const {
+        docs: quotes,
+        total,
+        page,
+        pages,
+      } = await client.listMovieQuotes(id, params);
+
+      expect(mock.history.get[0].url).toEqual(url);
+      expect(mock.history.get[0].params).toEqual(params);
+      expect(quotes.length).toBe(5);
+      expect(total).toBe(10);
+      expect(page).toBe(2);
+      expect(pages).toBe(2);
     });
   });
 
