@@ -7,6 +7,7 @@
     "node": ">= 18.16.0"
   },
   "scripts": {
+    "lint": "eslint . --fix",
     "prebuild": "rimraf ./dist/",
     "build": "tsc -p tsconfig.build.json",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -22,6 +23,12 @@
   },
   "homepage": "https://github.com/jhullse/jhonatan-sdk#readme",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.59.6",
+    "@typescript-eslint/parser": "^5.59.6",
+    "eslint": "^8.41.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.8",
     "rimraf": "^5.0.1",
     "typescript": "^5.0.4"
   }
