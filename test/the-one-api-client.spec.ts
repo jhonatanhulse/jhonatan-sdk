@@ -1,5 +1,5 @@
 import MockAdapter from 'axios-mock-adapter';
-import { Movie } from '../src/resources';
+import { Movie, Quote } from '../src/resources';
 import { TheOneApiClient } from '../src/the-one-api-client';
 import { MOVIES_P1, MOVIES_P2, QUOTES_P1, QUOTES_P2 } from './mock-data';
 
@@ -98,6 +98,20 @@ describe('TheOneApiClient', () => {
       expect(total).toBe(20);
       expect(page).toBe(2);
       expect(pages).toBe(2);
+    });
+  });
+
+  describe('#getQuote()', () => {
+    it('should return the quote with the passed id', async () => {
+      const id = '5cd96e05de30eff6ebcce7e9';
+      const url = `${TheOneApiClient.QUOTE_ENDPOINT}/${id}`;
+      mock.onGet(url).reply(200, QUOTES_P1);
+
+      const quote = (await client.getQuote(id)) as Quote;
+
+      expect(quote._id).toBe('5cd96e05de30eff6ebcce7e9');
+      expect(quote.dialog).toBe('Deagol!');
+      expect(quote.movie).toBe('5cd95395de30eff6ebccde5d');
     });
   });
 });
