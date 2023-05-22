@@ -60,6 +60,14 @@ client
 
 Check [DESIGN.md](DESIGN.md) for more details about the implementation.
 
+### Installing the dependencies
+
+In order to install the dependencies you can run:
+
+```bash
+npm install
+```
+
 ### Compiling the library
 
 You can compile the library with the following command:
